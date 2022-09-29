@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 //import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 //import android.util.Log;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 //import android.widget.ImageButton;
@@ -47,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buttons[i][j].setOnClickListener(MainActivity.this);
             }
         }
-
         Button buttonReset = findViewById(R.id.button_reset);
         buttonReset.setOnClickListener(v -> resetGame());
     }
@@ -140,6 +141,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void playerWin(int playerNum)
     {
+        MediaPlayer winSound = MediaPlayer.create(this, R.raw.airhorn);
+        winSound.start();
+
         switch(playerNum)
         {
             case 1:
@@ -155,12 +159,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 resetBoard();
                 break;
         }
+
+        if(!winSound.isPlaying())
+            winSound.release();
     }
 
     private void draw()
     {
+        MediaPlayer drawSound = MediaPlayer.create(this, R.raw.error);
+        drawSound.start();
+
         Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
         resetBoard();
+
+        if(!drawSound.isPlaying())
+            drawSound.release();
     }
 
     private void updatePointsText()
