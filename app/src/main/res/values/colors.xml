@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- my colors -->
+    <color name="ncm_Orange">#E37100</color>
+    <color name="ncm_OrangeDark">#BD5E00</color>
+    <color name="ncm_Brown">#623412</color>
+    <color name="ncm_Yellow">#FFE500</color>
+    <color name="ncm_lightYellow">#FFF280</color>
 </resources>

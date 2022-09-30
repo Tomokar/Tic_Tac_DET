@@ -1,13 +1,14 @@
 package com.example.tictacdet;
 
+//import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 //import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 //import android.util.Log;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 //import android.widget.ImageButton;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
     private final Button[][] buttons = new Button[3][3];
+//    private final String[][] strings = new String[3][3];
 
     private boolean player1Turn = true;
 
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textViewPlayer1;
     private TextView textViewPlayer2;
 
+    Drawable tic;
+    Drawable tac;
+
 //    private final Drawable startDraw = "@android";
 
     @Override
@@ -35,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        tic = getResources().getDrawable(R.drawable.tic_tac_tanner);
+        tac = getResources().getDrawable(R.drawable.tic_tac_burton);
 
         textViewPlayer1 = findViewById(R.id.text_view_p1);
         textViewPlayer2 = findViewById(R.id.text_view_p2);
@@ -63,13 +71,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(player1Turn)
         {
-//            ((ImageButton) v).setImageResource(R.drawable.tic_tac_tanner);
+//            ((ImageButton) v).setImageDrawable(tic);
             ((Button) v).setText("X");
+            ((Button) v).setCompoundDrawablesWithIntrinsicBounds(null, tic, null, null);
         }
         else
         {
-//            ((ImageButton) v).setImageResource(R.drawable.tic_tac_burton);
+//            ((ImageButton) v).setImageDrawable(tac);
             ((Button) v).setText("O");
+            ((Button) v).setCompoundDrawablesWithIntrinsicBounds(null, tac, null, null);
         }
 
         roundCount++;
@@ -106,8 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for (int j = 0; j < 3; j++)
             {
 //                field[i][j] = buttons[i][j].getDrawable();
-                field[i][j] = buttons[i][j].getText().toString();
+                field[i][j] = buttons[i][j].getText().toString(); //original
+//                field[i][j] = strings[i][j];
             }
+//            System.arraycopy(strings[i], 0, field[i], 0, 3);
         }
 
         for (int i = 0; i < 3; i++)
@@ -131,12 +143,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
 
-        if(field[0][2].equals(field[1][1]) && field[0][2].equals(field[2][0]) && !field[0][2].equals(""))
-        {
-            return true;
-        }
-
-        return false;
+//        if(field[0][2].equals(field[1][1]) && field[0][2].equals(field[2][0]) && !field[0][2].equals(""))
+//        {
+//            return true;
+//        }
+        return field[0][2].equals(field[1][1]) && field[0][2].equals(field[2][0]) && !field[0][2].equals("");
     }
 
     private void playerWin(int playerNum)
@@ -191,7 +202,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             for(int j = 0; j < 3; j++)
             {
+//                buttons[i][j].setImageResource(android.R.color.transparent);
                 buttons[i][j].setText("");
+                buttons[i][j].setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+//                strings[i][j] = "";
             }
         }
 
