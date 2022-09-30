@@ -62,17 +62,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button buttonReset = findViewById(R.id.button_reset);
         buttonReset.setOnClickListener(v -> resetGame());
 
-        switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
-        {
-            case Configuration.UI_MODE_NIGHT_YES:
-                textViewPlayer1.setTextColor(Color.WHITE);
-                textViewPlayer2.setTextColor(Color.WHITE);
-                break;
-            case Configuration.UI_MODE_NIGHT_NO:
-                textViewPlayer1.setTextColor(Color.BLACK);
-                textViewPlayer2.setTextColor(Color.BLACK);
-                break;
-        }
+//        switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+//        {
+//            case Configuration.UI_MODE_NIGHT_YES:
+//                textViewPlayer1.setTextColor(Color.WHITE);
+//                textViewPlayer2.setTextColor(Color.WHITE);
+//                break;
+//            case Configuration.UI_MODE_NIGHT_NO:
+//                textViewPlayer1.setTextColor(Color.BLACK);
+//                textViewPlayer2.setTextColor(Color.BLACK);
+//                break;
+//        }
     }
 
     @Override
