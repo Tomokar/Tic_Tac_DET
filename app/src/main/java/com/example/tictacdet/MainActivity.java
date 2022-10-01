@@ -5,12 +5,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 //import android.graphics.drawable.Drawable;
-import android.content.res.Configuration;
-import android.graphics.Color;
+//import android.content.Intent;
+//import android.content.res.Configuration;
+//import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 //import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 //import android.widget.ImageButton;
@@ -166,6 +168,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void playerWin(int playerNum)
     {
+        Handler mHandler;
+        Runnable mRunnable;
+
         MediaPlayer winSound = MediaPlayer.create(this, R.raw.airhorn);
         winSound.start();
 
@@ -175,13 +180,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 player1Points++;
                 Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
                 updatePointsText();
-                resetBoard();
+
+                mHandler = new Handler();
+                mRunnable = this::resetBoard;
+                mHandler.postDelayed(mRunnable,3000);
+//                resetBoard();
                 break;
             case 2:
                 player2Points++;
                 Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
                 updatePointsText();
-                resetBoard();
+
+                mHandler = new Handler();
+                mRunnable = this::resetBoard;
+                mHandler.postDelayed(mRunnable,3000);
                 break;
         }
 
@@ -191,11 +203,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void draw()
     {
+        Handler mHandler;
+        Runnable mRunnable;
+
         MediaPlayer drawSound = MediaPlayer.create(this, R.raw.error);
         drawSound.start();
 
         Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
-        resetBoard();
+
+        mHandler = new Handler();
+        mRunnable = this::resetBoard;
+        mHandler.postDelayed(mRunnable,3000);
 
         if(!drawSound.isPlaying())
             drawSound.release();
