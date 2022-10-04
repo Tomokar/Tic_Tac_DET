@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,33 +49,36 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <Button
+        <ImageButton
             android:id="@+id/button_00"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:freezesText="true"
+            android:contentDescription="@string/button_filler"
             android:textColor="#00FFFFFF"
             android:textSize="60sp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_01"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:freezesText="true"
+            android:contentDescription="@string/button_filler"
             android:textColor="#00FFFFFF"
             android:textSize="60sp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button_02"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:freezesText="true"
+            android:contentDescription="@string/button_filler"
             android:textColor="#00FFFFFF"
             android:textSize="60sp"/>
     </LinearLayout>
@@ -85,33 +88,36 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <Button
+        <ImageButton
             android:id="@+id/button_10"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:freezesText="true"
+            android:contentDescription="@string/button_filler"
             android:textColor="#00FFFFFF"
             android:textSize="60sp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button_11"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:freezesText="true"
+            android:contentDescription="@string/button_filler"
             android:textColor="#00FFFFFF"
             android:textSize="60sp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button_12"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:freezesText="true"
+            android:contentDescription="@string/button_filler"
             android:textColor="#00FFFFFF"
             android:textSize="60sp"/>
     </LinearLayout>
@@ -121,33 +127,36 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <Button
+        <ImageButton
             android:id="@+id/button_20"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:freezesText="true"
+            android:contentDescription="@string/button_filler"
             android:textColor="#00FFFFFF"
             android:textSize="60sp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button_21"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:freezesText="true"
+            android:contentDescription="@string/button_filler"
             android:textColor="#00FFFFFF"
             android:textSize="60sp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button_22"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:freezesText="true"
+            android:contentDescription="@string/button_filler"
             android:textColor="#00FFFFFF"
             android:textSize="60sp"/>
     </LinearLayout>

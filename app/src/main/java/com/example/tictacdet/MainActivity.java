@@ -3,26 +3,29 @@ package com.example.tictacdet;
 //import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 //import android.graphics.drawable.Drawable;
 //import android.content.Intent;
 //import android.content.res.Configuration;
 //import android.graphics.Color;
+//import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 //import android.util.Log;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
-//import android.widget.ImageButton;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
-    private final Button[][] buttons = new Button[3][3];
-//    private final String[][] strings = new String[3][3];
+    private final ImageButton[][] buttons = new ImageButton[3][3];
+    private final String[][] strings = new String[3][3];
 
     private boolean player1Turn = true;
 
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Drawable tic;
     Drawable tac;
+    Drawable empty;
 
 //    private final Drawable startDraw = "@android";
 
@@ -45,8 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tic = getResources().getDrawable(R.drawable.tic_tac_tanner);
-        tac = getResources().getDrawable(R.drawable.tic_tac_burton);
+//        tic = getResources().getDrawable(R.drawable.tic_tac_tanner);
+//        tac = getResources().getDrawable(R.drawable.tic_tac_burton);
+//        empty = getResources().getDrawable(R.color.ncm_OrangeDark);
+        tic = ResourcesCompat.getDrawable(getResources(), R.drawable.tic_tac_tanner, null);
+        tac = ResourcesCompat.getDrawable(getResources(), R.drawable.tic_tac_burton, null);
+        empty = ResourcesCompat.getDrawable(getResources(), R.color.ncm_OrangeDark, null);
 
         textViewPlayer1 = findViewById(R.id.text_view_p1);
         textViewPlayer2 = findViewById(R.id.text_view_p2);
@@ -59,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
                 buttons[i][j] = findViewById(resID);
                 buttons[i][j].setOnClickListener(MainActivity.this);
+                buttons[i][j].setImageDrawable(empty);
+                strings[i][j] = "";
             }
         }
         Button buttonReset = findViewById(R.id.button_reset);
@@ -80,22 +90,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v)
     {
-        if(!((Button) v).getText().toString().equals(""))
+        if(!((ImageButton) v).getDrawable().equals(empty))
         {
             return;
         }
 
+        String eye = ((ImageButton) v).getResources().getResourceEntryName(v.getId());
+        char[] eyeRay = eye.toCharArray();
+        int i = (int) eyeRay[7] - 48;
+        int j = (int) eyeRay[8] - 48;
+
         if(player1Turn)
         {
-//            ((ImageButton) v).setImageDrawable(tic);
-            ((Button) v).setText("X");
-            ((Button) v).setCompoundDrawablesWithIntrinsicBounds(null, tic, null, null);
+            ((ImageButton) v).setImageDrawable(tic);
+            strings[i][j] = "X";
+//            Toast.makeText(this, i + " & " + j, Toast.LENGTH_SHORT).show();
+
+//            ((Button) v).setText("X");
+//            ((Button) v).setCompoundDrawablesWithIntrinsicBounds(null, tic, null, null);
         }
         else
         {
-//            ((ImageButton) v).setImageDrawable(tac);
-            ((Button) v).setText("O");
-            ((Button) v).setCompoundDrawablesWithIntrinsicBounds(null, tac, null, null);
+            ((ImageButton) v).setImageDrawable(tac);
+            strings[i][j] = "O";
+//            ((Button) v).setText("O");
+//            ((Button) v).setCompoundDrawablesWithIntrinsicBounds(null, tac, null, null);
         }
 
         roundCount++;
@@ -129,12 +148,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < 3; i++)
         {
-            for (int j = 0; j < 3; j++)
-            {
-//                field[i][j] = buttons[i][j].getDrawable();
-                field[i][j] = buttons[i][j].getText().toString(); //original
-//                field[i][j] = strings[i][j];
-            }
+            //                field[i][j] = buttons[i][j].getDrawable();
+            //                field[i][j] = buttons[i][j].getText().toString(); //original
+            System.arraycopy(strings[i], 0, field[i], 0, 3);
 //            System.arraycopy(strings[i], 0, field[i], 0, 3);
         }
 
@@ -181,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
                 updatePointsText();
 
-                mHandler = new Handler();
+                mHandler = new Handler(Looper.getMainLooper());
                 mRunnable = this::resetBoard;
                 mHandler.postDelayed(mRunnable,3000);
 //                resetBoard();
@@ -191,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
                 updatePointsText();
 
-                mHandler = new Handler();
+                mHandler = new Handler(Looper.getMainLooper());
                 mRunnable = this::resetBoard;
                 mHandler.postDelayed(mRunnable,3000);
                 break;
@@ -211,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
 
-        mHandler = new Handler();
+        mHandler = new Handler(Looper.getMainLooper());
         mRunnable = this::resetBoard;
         mHandler.postDelayed(mRunnable,3000);
 
@@ -234,10 +250,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             for(int j = 0; j < 3; j++)
             {
-//                buttons[i][j].setImageResource(android.R.color.transparent);
-                buttons[i][j].setText("");
-                buttons[i][j].setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-//                strings[i][j] = "";
+                buttons[i][j].setImageDrawable(empty);
+//                buttons[i][j].setText("");
+//                buttons[i][j].setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                strings[i][j] = "";
             }
         }
 
